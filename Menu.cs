@@ -82,8 +82,8 @@ namespace Biblioteca
 
             foreach (Livro livro in livros)
             {
-                Console.WriteLine($"Título: {livro.Titulo}\nAutor: {livro.Autor}\nEdição: {livro.Edicao}\nGênero: {livro.Genero}");
-                Console.WriteLine("----------------------------------------------------");
+                Console.WriteLine($"ISBN: {livro.ISBN}\nTítulo: {livro.Titulo}\nAutor: {livro.Autor}\nEdição: {livro.Edicao}\nGênero: {livro.Genero}");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
             }
         }
 
@@ -93,13 +93,17 @@ namespace Biblioteca
             if (File.Exists(dirLivro))
             {
                 string[] linhas = File.ReadAllLines(dirLivro);
-                Livro livro = null;
+                Livro? livro = null;
 
                 foreach (string linha in linhas)
                 {
-                    if (linha.StartsWith("Título:"))
+                    if (linha.StartsWith("ISBN:"))
                     {
                         livro = new Livro();
+                        livro.ISBN = linha.Replace("ISBN: ", "").Trim();
+                    }
+                    else if (linha.StartsWith("Título:") && livro != null)
+                    {
                         livro.Titulo = linha.Replace("Título: ", "").Trim();
                     }
                     else if (linha.StartsWith("Autor:") && livro != null)
@@ -127,11 +131,12 @@ namespace Biblioteca
             {
                 foreach (Livro livro in livros)
                 {
+                    writer.WriteLine($"ISBN: {livro.ISBN}");
                     writer.WriteLine($"Título: {livro.Titulo}");
                     writer.WriteLine($"Autor: {livro.Autor}");
                     writer.WriteLine($"Edição: {livro.Edicao}");
                     writer.WriteLine($"Gênero: {livro.Genero}");
-                    writer.WriteLine("---------------------------------------------------------------");
+                    writer.WriteLine("----------------------------------------------------------------------------------------------------");
                 }
             }
         }

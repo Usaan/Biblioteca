@@ -2,15 +2,23 @@ namespace Biblioteca
 {
     public class Livro
     {
+        private string isbn;
         private string titulo;
         private string autor;
         private string edicao;
         private string genero;
 
-        public string Titulo { 
-        get => titulo; 
-        set => titulo = (string.IsNullOrWhiteSpace(value))
-        ? throw new ArgumentException("O titulo do livro é obrigatório.") : value; }
+        public string ISBN {
+            get => isbn;
+            set => isbn = (string.IsNullOrWhiteSpace(value))
+            ? throw new ArgumentException("O ISBN do livro é obrigatório.") : value;
+        }
+        public string Titulo
+        { 
+            get => titulo; 
+            set => titulo = (string.IsNullOrWhiteSpace(value))
+            ? throw new ArgumentException("O titulo do livro é obrigatório.") : value; 
+        }
         
         public string Autor {
         get => autor;
@@ -29,8 +37,24 @@ namespace Biblioteca
 
         public void cadastrar_livro()
         {
-            bool tituloValido = false, autorValido = false, edicaoValida = false, generoValido = false;
+            bool isbnValido = false, tituloValido = false, autorValido = false, edicaoValida = false, generoValido = false;
 
+            while (!isbnValido)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("Digite o ISBN: ");
+                    ISBN = Console.ReadLine();
+                    Console.Clear();
+                    isbnValido = true;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine($"Erro: {error.Message}");
+                 Console.ReadKey();
+                }
+            }
             while (!tituloValido)
             {
                 try
@@ -97,11 +121,6 @@ namespace Biblioteca
                     Console.ReadKey();
                 }
             }
-        }
-
-        public void retornar_livro()
-        {
-            Console.WriteLine($"Nome: {Titulo}\nAutor: {Autor}\nEdição: {Edicao}\nGenero: {Genero}");
         }
     }
 }	
