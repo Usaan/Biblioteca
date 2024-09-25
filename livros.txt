@@ -1,20 +1,6 @@
-Título: Peter Pan
-Autor: Lila
-Edição: 2023 Panini
-Gênero: Acao, Romance, Terror, Aventura
----------------------------------------------------------------
-Título: kdaskd
-Autor: ksdasdk
-Edição: ksadkas
-Gênero: ksdaks
----------------------------------------------------------------
-Título: dsadka
-Autor: dsakdaksdasd
-Edição: akdskadaskdkasd
-Gênero: kdaksdkasdkasdk
----------------------------------------------------------------
-Título: dsad
-Autor: aa
-Edição: aaaa
-Gênero: aaaaa
----------------------------------------------------------------
+ISBN: 978-8535933925
+Título: Sapiens, Uma Breve Historia da Humanidade
+Autor: Yuval Noah Harari
+Edição: Companhia das Letras; 1a edicao
+Gênero: Historia, Antropologia, Ciencia Social, Filosofia, Sociologia
+----------------------------------------------------------------------------------------------------
