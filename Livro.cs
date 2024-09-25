@@ -35,7 +35,14 @@ namespace Biblioteca
         set => genero = (string.IsNullOrWhiteSpace(value))
         ? throw new ArgumentException("O gênero do livro é obrigatório") : value;}
 
-        public void cadastrar_livro()
+        static string Input(string Texto, string Value)
+        {
+            Console.WriteLine($"{Texto} (Atual: {Value})");
+            string input = Console.ReadLine();
+            return string.IsNullOrWhiteSpace(input) ? Value : input;
+        }
+        
+        public void Cadastrar_Livro()
         {
             bool isbnValido = false, tituloValido = false, autorValido = false, edicaoValida = false, generoValido = false;
 
@@ -52,7 +59,7 @@ namespace Biblioteca
                 catch (Exception error)
                 {
                     Console.WriteLine($"Erro: {error.Message}");
-                 Console.ReadKey();
+                    Console.ReadKey();
                 }
             }
             while (!tituloValido)
@@ -120,6 +127,44 @@ namespace Biblioteca
                     Console.WriteLine($"Erro: {error.Message}");
                     Console.ReadKey();
                 }
+            }
+        }
+
+        public void Editar_Livro(List<Livro> livros)
+        {
+            var found = false;
+            if (livros.Count == 0)
+            {
+                Console.WriteLine("Nenhum livro cadastrado.");
+                return;
+            }
+
+            Console.WriteLine("Digite o ISBN do livro que deseja editar: ");
+            string ISBN = Console.ReadLine();
+            Console.Clear();
+
+            Livro livro = livros.FirstOrDefault(l => l.ISBN == ISBN);
+            if (livro == null)
+            {
+                Console.WriteLine("Livro não encontrado.");
+                return;
+            }
+            
+            livro.Titulo = Input("Digite o título: ", livro.Titulo);
+            Console.Clear();
+            livro.Autor = Input("Digite o autor: ", livro.Autor);
+            Console.Clear();
+            livro.Edicao = Input("Digite a edição: ", livro.Edicao);
+            Console.Clear();
+            livro.Genero = Input("Digite o gênero: ", livro.Genero);
+
+            Console.Clear();
+            Console.WriteLine("Livro editado com sucesso!");
+            found = true;
+
+            if (!found)
+            {
+                Console.WriteLine("Livro não encontrado.");
             }
         }
     }
