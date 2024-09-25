@@ -12,13 +12,13 @@ namespace Biblioteca
             while (menu)
             {
                 Console.Clear();
-                Console.WriteLine("                      MENU PRINCIPAL");
-                Console.WriteLine("----------------------------------------------------------");
-                Console.WriteLine("[1] Cadastrar Livro.\t\t[2] Listar Livros.");
-                Console.WriteLine("[3] Cadastrar Funcionário.\t[4] Listar Funcionários.");
-                Console.WriteLine("[5] Cadastrar Aluno.\t\t[6] Listar Alunos.");
-                Console.WriteLine("[0] Sair.");
-                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine("                                      MENU PRINCIPAL");
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+                Console.WriteLine("   [1] Cadastrar Livro.\t\t[2] Listar Livros.\t\t[3] Editar Livros.");
+                Console.WriteLine("   [4] Cadastrar Funcionário.\t[5] Listar Funcionários.\t[6] Editar Funcionários.");
+                Console.WriteLine("   [7] Cadastrar Aluno.\t\t[8] Listar Alunos.\t\t[9] Editar Alunos.");
+                Console.WriteLine("   [0] Sair.");
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
                 Console.Write("Escolha a opção desejada: ");
                 var opcao = int.Parse(Console.ReadLine());
 
@@ -28,7 +28,7 @@ namespace Biblioteca
                         Console.Clear();
 
                         Livro livro = new();
-                        livro.cadastrar_livro();
+                        livro.Cadastrar_Livro();
                         livros.Add(livro);
                         Console.Clear();
                         writeBook(dirLivro, livros);
@@ -42,6 +42,12 @@ namespace Biblioteca
                         break;
 
                     case 3:
+                        Console.Clear();
+                        livros = loadBooks(dirLivro);
+                        var ToEdit = new Livro();
+                        ToEdit.Editar_Livro(livros);
+                        writeBook(dirLivro, livros);
+                        Console.ReadKey();
                         break;
 
                     case 4:
@@ -52,7 +58,12 @@ namespace Biblioteca
 
                     case 6:
                         break;
-
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
                     case 0:
                         menu = false;
                         break;
@@ -62,13 +73,6 @@ namespace Biblioteca
                         Console.ReadKey();
                         break;
                 }
-            }
-        }
-        static void dirExiste(string dirArquivo)
-        {
-            if (!File.Exists(dirArquivo))
-            {
-                File.Create(dirArquivo).Close();
             }
         }
 
@@ -84,6 +88,14 @@ namespace Biblioteca
             {
                 Console.WriteLine($"ISBN: {livro.ISBN}\nTítulo: {livro.Titulo}\nAutor: {livro.Autor}\nEdição: {livro.Edicao}\nGênero: {livro.Genero}");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            }
+        }
+
+        static void dirExiste(string dirArquivo)
+        {
+            if (!File.Exists(dirArquivo))
+            {
+                File.Create(dirArquivo).Close();
             }
         }
 
