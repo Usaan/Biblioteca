@@ -132,7 +132,6 @@ namespace Biblioteca
 
         public void Editar_Livro(List<Livro> livros)
         {
-            var found = false;
             if (livros.Count == 0)
             {
                 Console.WriteLine("Nenhum livro cadastrado.");
@@ -147,6 +146,7 @@ namespace Biblioteca
             if (livro == null)
             {
                 Console.WriteLine("Livro não encontrado.");
+                Console.ReadKey();
                 return;
             }
             
@@ -160,12 +160,28 @@ namespace Biblioteca
 
             Console.Clear();
             Console.WriteLine("Livro editado com sucesso!");
-            found = true;
-
-            if (!found)
+        }
+    
+        public void Excluir_Livro(List<Livro> livros)
+        {
+            if (livros.Count == 0)
             {
-                Console.WriteLine("Livro não encontrado.");
+                Console.WriteLine("Nenhum livro cadastrado.");
+                return;
             }
+
+            Console.WriteLine("Digite o ISBN do livro que deseja excluir: ");
+            string ISBN = Console.ReadLine();
+            Console.Clear();
+            Livro livro = livros.FirstOrDefault(l => l.ISBN == ISBN);
+            if (livro == null)
+            {
+                Console.WriteLine("Livro não encontrado.");
+                Console.ReadKey();
+                return;
+            }
+            livros.Remove(livro);
+            Console.WriteLine("Livro excluído com sucesso!");
         }
     }
 }	
