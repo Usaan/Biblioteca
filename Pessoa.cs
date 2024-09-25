@@ -52,7 +52,7 @@ abstract class Pessoa
                 Console.WriteLine("Digite o CPF: ");
                 Cpf = Console.ReadLine();
                 Console.Clear();
-                cpfValido = true;
+                cpfValido = validarCpf(Cpf);
             }
             catch (ArgumentException error)
             {
@@ -87,12 +87,10 @@ abstract class Pessoa
     {
         if (string.IsNullOrWhiteSpace(value)) {
             throw new ArgumentException("O cpf da pessoa é obrigatório!");
-            return false;
         }
         string cpfPostInput = value.Replace(".", "").Replace("-", "");
         if (cpfPostInput.Length != 11) {
             throw new ArgumentException("Cpf digitado de forma equivocada!");
-            return false;
         }
 
         int veri1 = 0, veri2 = 0, digitoVeri, soma = 0;
@@ -116,6 +114,6 @@ abstract class Pessoa
         veri2 = (veri2 < 2 || veri2 > 9) ? 0 : (11 - veri2);
 
         digitoVeri = (veri1 * 10) + veri2;
-        return ((cpfInt[9] * 10 + cpfInt[10] == digitoVeri));
+        return (cpfInt[9] * 10 + cpfInt[10] == digitoVeri);
     }
 }
