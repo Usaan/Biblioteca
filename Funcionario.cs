@@ -1,6 +1,6 @@
 namespace Biblioteca
 {
-    public class Funcionario : Pessoa
+    class Funcionario : Pessoa
     {
         private static int ultimoId = 0;
         private int id_funcionario;

@@ -1,4 +1,4 @@
-public class Pessoa
+abstract class Pessoa
 {
     private string nome;
     private string cpf;
