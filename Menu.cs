@@ -33,29 +33,60 @@ namespace Biblioteca
                         Console.Clear();
                         writeBook(dirLivro, livros);
                         break;
-
                     case 2:
                         Console.Clear();
                         livros = loadBooks(dirLivro);
                         showBooks(livros);
                         Console.ReadKey();
                         break;
-
                     case 3:
                         Console.Clear();
-                        livros = loadBooks(dirLivro);
-                        var ToEdit = new Livro();
-                        ToEdit.Editar_Livro(livros);
-                        writeBook(dirLivro, livros);
-                        Console.ReadKey();
-                        break;
 
+                        Console.WriteLine("[1] Editar livro\n[2] Remover livro\n[3] Voltar");
+                        Console.Write("Escolha a opção desejada: ");
+                        var opt = int.Parse(Console.ReadLine());
+
+                        switch (opt)
+                        {
+                            case 1:
+                                Console.Clear();
+
+                                livros = loadBooks(dirLivro);
+                                if (livros.Count == 0)
+                                {
+                                    Console.WriteLine("Nenhum Livro Cadastrado!");
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                var ToEdit = new Livro();
+                                ToEdit.Editar_Livro(livros);
+                                writeBook(dirLivro, livros);
+                                break;
+                            case 2:
+                                Console.Clear();
+
+                                if (livros.Count == 0)
+                                {
+                                    Console.WriteLine("Nenhum Livro Cadastrado!");
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                livros = loadBooks(dirLivro);
+                                var ToDelete = new Livro();
+                                ToDelete.Excluir_Livro(livros);
+                                writeBook(dirLivro, livros);
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                Console.WriteLine("Opção inválida!");
+                                break;
+                        }
+                        break;
                     case 4:
                         break;
-
                     case 5:
                         break;
-
                     case 6:
                         break;
                     case 7:
